@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "e3986446-77e0-4f28-995c-1691debb3d71",
+		"name": "user-crud",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9202403",
+		"_collection_link": "https://martian-station-265714.postman.co/workspace/teste~c3ddcc69-95aa-477f-8a52-2373f024efba/collection/9202403-e3986446-77e0-4f28-995c-1691debb3d71?action=share&source=collection_link&creator=9202403"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Joe Doe\",\r\n    \"lastName\": \"Joe Doe\",\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/65021c91b6b7cd44094aac25a",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"65021c91b6b7cd44094aac25a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"joe@test.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/65021c91b6b7cd44094aac25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"65021c91b6b7cd44094aac25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/65021c91b6b7cd44094aac25",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"65021c91b6b7cd44094aac25"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
