@@ -1,10 +1,10 @@
 {
-  "name": "nodejs",
+  "name": "user-api",
   "version": "1.0.0",
-  "description": "Curso de Node.js",
-  "main": "app.js",
+  "description": "Application for user management",
+  "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon app.js"
+    "start:dev": "nodemon src/index.js"
   },
   "author": "Abel Gasque",
   "license": "ISC",
@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "mongoose": "^7.5.1"
+    "express": "^4.18.2"
   }
 }
