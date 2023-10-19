@@ -5,9 +5,13 @@ const ErrorMiddleware = require("./api/middlewares/error.middleware");
 const createApp = () => {
     const app = express();
 
-    app.use(express.json());
+    const swaggerRoutes = require("./routes/swagger.routes");
+    const healthRoutes = require("./routes/health.routes");
 
-    //aqui vão as rotas da api
+    app.use(express.json());
+    
+    app.use("/", swaggerRoutes);
+    app.use("/api/health", healthRoutes);
 
     app.use(ErrorMiddleware.handle);
 
