@@ -7,18 +7,22 @@ services:
     ports:
       - "9090:9090"
     depends_on:
-      - postgres
+      - mongo
     links:
-      - postgres
+      - mongo
     container_name: user-api
 
-  postgres:
-    image: postgres
-    restart: always
+  mongo:
+    image: mongo
     ports:
-      - "5432:5432"
+      - '27017:27017'
     environment:
-      POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "123456"
-      POSTGRES_DB: "user_db"
-    container_name: postgres-user-api
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    volumes:
+      - mongodb_data:/data/db
+    container_name: db-api
+
+volumes:
+  mongodb_data:
+    external: false

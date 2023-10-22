@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "e3986446-77e0-4f28-995c-1691debb3d71",
+		"_postman_id": "f9227034-413d-4c8c-83ee-391985197744",
 		"name": "user-crud",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "9202403",
-		"_collection_link": "https://martian-station-265714.postman.co/workspace/teste~c3ddcc69-95aa-477f-8a52-2373f024efba/collection/9202403-e3986446-77e0-4f28-995c-1691debb3d71?action=share&source=collection_link&creator=9202403"
+		"_collection_link": "https://martian-station-265714.postman.co/workspace/teste~39f03b14-a584-46e1-8a71-02c22e06d067/collection/9202403-f9227034-413d-4c8c-83ee-391985197744?action=share&source=collection_link&creator=9202403"
 	},
 	"item": [
 		{
@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Joe Doe\",\r\n    \"lastName\": \"Joe Doe\",\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Joe Doe\",\r\n    \"lastName\": \"Joe Doe\",\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\",\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -25,12 +25,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users",
+							"raw": "{{baseUrl}}/user",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users"
+								"user"
 							]
 						}
 					},
@@ -42,12 +42,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users",
+							"raw": "{{baseUrl}}/user",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users"
+								"user"
 							]
 						}
 					},
@@ -59,13 +59,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users/65021c91b6b7cd44094aac25a",
+							"raw": "{{baseUrl}}/user/{{userId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
-								"65021c91b6b7cd44094aac25a"
+								"user",
+								"{{userId}}"
 							]
 						}
 					},
@@ -78,7 +78,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"joe@test.com\"\r\n}",
+							"raw": "{\r\n    \"active\": false\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -86,13 +86,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/users/65021c91b6b7cd44094aac25",
+							"raw": "{{baseUrl}}/user/{{userId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
-								"65021c91b6b7cd44094aac25"
+								"user",
+								"{{userId}}"
 							]
 						}
 					},
@@ -104,13 +104,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/users/65021c91b6b7cd44094aac25",
+							"raw": "{{baseUrl}}/user/{{userId}}",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"users",
-								"65021c91b6b7cd44094aac25"
+								"user",
+								"{{userId}}"
 							]
 						}
 					},
@@ -142,7 +142,12 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:8080",
+			"value": "http://localhost:9090/api",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "null",
 			"type": "string"
 		}
 	]
