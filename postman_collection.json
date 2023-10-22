@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Joe Doe\",\r\n    \"lastName\": \"Joe Doe\",\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\",\r\n    \"active\": true\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Joe\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\",\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
