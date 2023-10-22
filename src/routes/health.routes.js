@@ -11,7 +11,7 @@ const controller = new HealthController();
  *     summary: Verificar o status da aplicação
  *     description: Esta rota verifica o status da aplicação e retorna uma mensagem.
  *     tags:
- *       - Health
+ *       - [ Health ]
  *     responses:
  *       200:
  *         description: Sucesso. A aplicação está em execução.

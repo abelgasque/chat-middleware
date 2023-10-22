@@ -7,5 +7,4 @@ router.get('/', (req, res) => {
     res.redirect('/swagger');
 });
 
-
 module.exports = router;
