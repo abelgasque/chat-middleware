@@ -8,16 +8,71 @@
 	},
 	"item": [
 		{
-			"name": "User",
+			"name": "Auth",
 			"item": [
 				{
-					"name": "Create",
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();\r",
+									"pm.collectionVariables.set(\"access_token\", responseJson.access_token);\r",
+									"pm.collectionVariables.set(\"refresh_token\", responseJson.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Joe\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\",\r\n    \"active\": true\r\n}",
+							"raw": "{\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Joe\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"joe2@doe.com\",\r\n    \"password\": \"1234567\",\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,15 +94,31 @@
 				{
 					"name": "Read",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/user",
+							"raw": "{{baseUrl}}/user?email=joe@doe.com",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "joe@doe.com"
+								}
 							]
 						}
 					},
@@ -56,6 +127,16 @@
 				{
 					"name": "Read By Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -74,6 +155,16 @@
 				{
 					"name": "Update",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -101,6 +192,16 @@
 				{
 					"name": "delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -144,6 +245,14 @@
 			"key": "baseUrl",
 			"value": "http://localhost:9090/api",
 			"type": "string"
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "refresh_token",
+			"value": ""
 		},
 		{
 			"key": "userId",
