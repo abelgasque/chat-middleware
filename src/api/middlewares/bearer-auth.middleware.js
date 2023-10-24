@@ -12,13 +12,13 @@ class BearerAuthMiddleware {
             return res.status(401).json({ message: "O serviço não pode ser acessado sem um token válido." });
         }
 
-        jwt.verify(token.split(' ')[1].trim(), JWT_SECRET, (err, decoded) => {
+        jwt.verify(token.split(' ')[1].trim(), JWT_SECRET, async (err, decoded) => {
             if (err) {
                 console.log(token);
                 return res.status(403).json({ message: "O token fornecido é inválido." });
             }
 
-            const user = userService.readByEmail(decoded.email);
+            const user = await userService.readByEmail(decoded.email);
             if (!user) {
                 return res.status(404).json({ message: "Usuário não localizado" });
             }

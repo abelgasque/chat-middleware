@@ -26,7 +26,8 @@ class UserController {
     readById = async (req, res, next) => {
         try {
             const id = req.params.id;
-            res.status(200).json(await userService.readById(id));
+            const user = await userService.readById(id);
+            res.status((user) ? 200 : 204).json(user);
         } catch (error) { next(error); }
     };
 
