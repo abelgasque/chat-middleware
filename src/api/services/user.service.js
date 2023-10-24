@@ -21,6 +21,14 @@ class UserService {
         return await UserModel.findById(id);
     }
 
+    async readByEmailAndPassword(email, password) {
+        return await UserModel.findOne({ email, password });
+    }
+
+    readByEmail(email) {
+        return UserModel.findOne({ email });
+    }
+
     async update(id, data) {
         return await UserModel.findByIdAndUpdate(id, data, { new: true });
     }

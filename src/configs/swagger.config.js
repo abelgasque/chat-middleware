@@ -40,6 +40,22 @@ const swaggerOptions = {
             },
           },
         },
+        UserAuth: {
+          type: "object",
+          required: ["firstName", "lastName", "email", "password", "active"],
+          properties: {
+            email: {
+              type: "string",
+              format: "email",
+              description: "Endereço de e-mail do usuário",
+            },
+            password: {
+              type: "string",
+              format: "password",
+              description: "Senha do usuário (mínimo de 7 caracteres)",
+            }
+          },
+        },
       },
     },
     securityDefinitions: {
