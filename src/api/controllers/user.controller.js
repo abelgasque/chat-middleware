@@ -34,6 +34,18 @@ class UserController {
     update = async (req, res, next) => {
         try {
             const id = req.params.id;
+            const user = await userService.readById(id);
+            if (!user) {
+                res.status(400).json({ error: "Usuário não localizado", message: "Identificador do usuário não localizado" });
+            }
+
+            if (user.email != req.body?.email) {
+                const findByEmail = await userService.readByEmail(req.body.email);
+                if (findByEmail && findByEmail._id != user._id) {
+                    res.status(400).json({ error: "Email já cadastrado", message: "Email cadastrado para outro usuário" });
+                }
+            }
+
             res.status(200).json(await userService.update(id, req.body, { new: true }));
         } catch (error) { next(error); }
     };
