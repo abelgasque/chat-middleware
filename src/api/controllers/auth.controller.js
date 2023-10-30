@@ -24,7 +24,7 @@ class AuthController {
                 return res.status(400).json({ message: "Usuário inátivo" });
             }
 
-            res.status(200).json(generateToken(user));
+            return res.status(200).json(generateToken(user));
         } catch (error) { next(error); }
     };
 }
