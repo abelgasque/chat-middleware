@@ -11,6 +11,16 @@ const swaggerOptions = {
       version: "1.0.0",
     },
     components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
+      },
+    },
+    security: [{ bearerAuth: [] }],
+    components: {
       schemas: {
         User: {
           type: "object",
@@ -57,13 +67,12 @@ const swaggerOptions = {
           },
         },
       },
-    },
-    securityDefinitions: {
-      bearerAuth: {
-        type: process.env.JWT_SECRET,
-        name: 'Authorization',
-        in: 'header',
-        scheme: 'bearer',
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
       },
     },
   },
