@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, "O campo senha é obrigatório."],
-        minlength: [7, "A senha deve ter no mínimo 7 caracteres."]
+        minlength: [4, "A senha deve ter no mínimo 4 caracteres."]
     },
     active: {
         type: Boolean,
