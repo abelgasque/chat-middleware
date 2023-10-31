@@ -1,5 +1,4 @@
 const UserService = require("../services/user.service");
-const userService = new UserService();
 
 /**
  * @swagger
@@ -9,9 +8,13 @@ const userService = new UserService();
  */
 class UserController {
 
+    constructor() {
+        this.userService = new UserService();
+    }
+
     create = async (req, res, next) => {
         try {
-            return res.status(201).json(await userService.create(req.body));
+            return res.status(201).json(await this.userService.create(req.body));
         } catch (error) { next(error); }
     };
 
@@ -19,42 +22,28 @@ class UserController {
         try {
             const { firstName, lastName, email, active } = req.query;
             const filters = { firstName, lastName, email, active };
-            return res.status(200).json(await userService.read(filters));
+            return res.status(200).json(await this.userService.read(filters));
         } catch (error) { next(error); }
     };
 
     readById = async (req, res, next) => {
         try {
             const id = req.params.id;
-            const user = await userService.readById(id);
-            return res.status((user) ? 200 : 204).json(user);
+            return res.status(200).json(await this.userService.readById(id));
         } catch (error) { next(error); }
     };
 
     update = async (req, res, next) => {
         try {
             const id = req.params.id;
-            const user = await userService.readById(id);
-            if (!user) {
-                return res.status(400).json({ error: "Usuário não localizado", message: "Identificador do usuário não localizado" });
-            }
-
-            if (user.email != req.body?.email) {
-                const findByEmail = await userService.readByEmail(req.body.email);
-                if (findByEmail && findByEmail._id != user._id) {
-                    return res.status(400).json({ error: "Email já cadastrado", message: "Email cadastrado para outro usuário" });
-                }
-            }
-
-            return res.status(200).json(await userService.update(id, req.body, { new: true }));
+            return res.status(200).json(await this.userService.update(id, req.body, { new: true }));
         } catch (error) { next(error); }
     };
 
     delete = async (req, res, next) => {
         try {
             const id = req.params.id;
-            await userService.delete(id);
-            return res.status(204).json(null);
+            return res.status(204).json(await this.userService.delete(id));
         } catch (error) { next(error); }
     };
 

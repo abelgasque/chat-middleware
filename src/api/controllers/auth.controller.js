@@ -1,7 +1,4 @@
-const UserService = require("../services/user.service");
-const { generateToken } = require("../../helpers/token.helper");
-
-const userService = new UserService();
+const AuthService = require("../services/auth.service");
 
 /**
  * @swagger
@@ -11,20 +8,14 @@ const userService = new UserService();
  */
 class AuthController {
 
+    constructor() {
+        this.authService = new AuthService();
+    }
+
     login = async (req, res, next) => {
         try {
             const { email, password } = req.body;
-            const user = await userService.readByEmailAndPassword(email, password);
-
-            if (!user) {
-                return res.status(401).json({ message: "Credenciais inválidas" });
-            }
-
-            if (!user.active) {
-                return res.status(400).json({ message: "Usuário inátivo" });
-            }
-
-            return res.status(200).json(generateToken(user));
+            return res.status(200).json(await this.authService.login(email, password));
         } catch (error) { next(error); }
     };
 }
