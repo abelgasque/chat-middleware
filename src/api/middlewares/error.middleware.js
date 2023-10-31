@@ -1,10 +1,8 @@
 const errorMap = {
-    BadRequestException: {
-        status: 400
-    },
-    UnauthorizedRequestException: {
-        status: 401
-    }
+    BadRequestException: { status: 400 },
+    UnauthorizedRequestException: { status: 401 },
+    ForbiddenRequestException: { status: 403 },
+    NotFoundRequestException: { status: 404 }
 };
 
 class ErrorMiddleware {
