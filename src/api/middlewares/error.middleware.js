@@ -1,4 +1,11 @@
-const BadRequestException = require("../models/exceptions/bad-request.exception");
+const errorMap = {
+    BadRequestException: {
+        status: 400
+    },
+    UnauthorizedRequestException: {
+        status: 401
+    }
+};
 
 class ErrorMiddleware {
     static handle(err, req, res, next) {
@@ -12,7 +19,12 @@ class ErrorMiddleware {
                 }
             }
             res.status(400).json({ error: "Erro de validação", messages });
-        } else {
+        }
+        else if (errorMap[err.name]) {
+            const { status } = errorMap[err.name];
+            res.status(status).json(err.getErrorObject());
+        }
+        else {
             res.status(500).json({ error: "Ocorreu um erro interno na aplicação.", message: err.message, });
         }
     }
