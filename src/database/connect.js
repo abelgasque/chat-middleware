@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const { DB_SERVER, DB_DATABASE, DB_USERNAME, DB_PASSWORD } = process.env;
-const uri = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_SERVER}/${DB_DATABASE}`;
+const { DB_SERVER, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD } = process.env;
+const uri = `mongodb://${DB_USERNAME}:${DB_PASSWORD}@${DB_SERVER}:${DB_PORT}/${DB_DATABASE}`;
 
 const connectToDatabase = async () => {
     try {
