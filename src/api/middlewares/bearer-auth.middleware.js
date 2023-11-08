@@ -14,7 +14,6 @@ class BearerAuthMiddleware {
 
         jwt.verify(token.split(' ')[1].trim(), JWT_SECRET, async (err, decoded) => {
             if (err) {
-                console.log(token);
                 return res.status(403).json({ message: "O token fornecido é inválido." });
             }
 
