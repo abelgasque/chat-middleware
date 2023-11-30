@@ -66,6 +66,16 @@ const swaggerOptions = {
             }
           },
         },
+        RefreshAuth: {
+          type: "object",
+          required: ["refresh_token"],
+          properties: {
+            refresh_token: {
+              type: "string",
+              description: "Token para autenticação",
+            }
+          },
+        },
       },
       securitySchemes: {
         bearerAuth: {

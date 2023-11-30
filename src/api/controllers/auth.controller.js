@@ -14,8 +14,15 @@ class AuthController {
 
     login = async (req, res, next) => {
         try {
-            const { email, password } = req.body;
-            return res.status(200).json(await this.authService.login(email, password));
+            const { username, password } = req.body;
+            return res.status(200).json(await this.authService.login(username, password));
+        } catch (error) { next(error); }
+    };
+
+    refresh = async (req, res, next) => {
+        try {
+            const { refresh_token } = req.body;
+            return res.status(200).json(await this.authService.refresh(refresh_token));
         } catch (error) { next(error); }
     };
 }
