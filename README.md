@@ -1,12 +1,12 @@
-# API Node.js com MongoDB (Atlas)
+# API Node.js com MongoDB
 
-Este é um exemplo de um projeto de API em Node.js utilizando o MongoDB (Atlas) com fins educativos. O objetivo deste projeto é demonstrar como criar uma API simples para gerenciar usuários. Você pode usar este projeto como referência para aprender os conceitos básicos de desenvolvimento de APIs com Node.js e MongoDB.
+Este é um exemplo de um projeto de API em Node.js utilizando o MongoDB com fins educativos. O objetivo deste projeto é demonstrar como criar uma API simples para gerenciar usuários. Você pode usar este projeto como referência para aprender os conceitos básicos de desenvolvimento de APIs com Node.js e MongoDB.
 
 ### Requisitos
 Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desenvolvimento:
 
 - Node.js (versão 18 ou superior)
-- MongoDB (pode ser local ou uma instância do MongoDB Atlas)
+- Docker
 - Git (opcional, se você quiser clonar este repositório)
 
 ### Configuração
@@ -21,25 +21,14 @@ cd AbelGasque.Node.User
 npm install
 ```
 
-3- Configure as variáveis de ambiente necessárias no arquivo .env. Você deve fornecer as informações de conexão com o banco de dados MongoDB Atlas, se aplicável.
-``` bash
-NODE_ENV=debug
-MONGODB_DATABASE=seu_db
-MONGODB_USERNAME=seu_usuario
-MONGODB_PASSWORD=sua_senha
-```
+3- Variáveis de ambiente necessárias estão no arquivo `.env-exemple` e precisa ser renomeado para `.env`.
 
-4- Configure sua URI do mongo para conexão do banco de dados, no meu caso criei uma instância gratuita pelo mongo atlas.
-``` bash
-mongodb+srv://${username}:${password}@cursonodejs.ngmkvdd.mongodb.net/${database}?retryWrites=true&w=majority
-```
-
-5- Inicie o servidor:
+4- Inicie o servidor:
 ``` bash
 npm run start:dev
 ```
 
-Agora, o servidor estará em execução na porta 8080 (ou na porta que você especificou no arquivo app.js).
+Agora, o servidor estará em execução na porta 9090 (ou na porta que você especificou no arquivo index.js).
 
 ### Endpoints
 A API possui os seguintes endpoints para gerenciar usuários:
@@ -54,6 +43,18 @@ A API possui os seguintes endpoints para gerenciar usuários:
 Você pode testar a API utilizando uma ferramenta como o Postman ou fazendo requisições HTTP a partir de qualquer cliente. Certifique-se de seguir os padrões RESTful para interagir com os endpoints.
 
 Para maior comodidade, na raiz do projeto, você encontrará o arquivo `postman_collection.json` que contém todas as requisições pré-configuradas para o Postman. Basta importar este arquivo no aplicativo do Postman para começar a testar a API imediatamente. Isso facilitará a sua interação com os endpoints e permitirá que você explore todas as funcionalidades da API de forma mais eficiente.
+
+## Implantar Aplicação em Ambiente de Desenvolvimento com Docker
+
+Para implantar sua aplicação em um ambiente de desenvolvimento usando Docker basta executar o comando abaixo na raiz do projeto:
+
+``` bash
+docker-compose up -d
+```
+
+Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 9090 do contêiner para a porta 9090 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost:9090.
+
+Com esses passos, sua aplicação estará implantada e em execução em um ambiente de desenvolvimento Docker, pronto para ser testada e depurada conforme necessário. Certifique-se de adaptar os comandos e as configurações conforme apropriado para o seu projeto específico.
 
 ### Contribuindo
 Sinta-se à vontade para contribuir com melhorias, correções de bugs ou adicionar novos recursos a este projeto. Basta fazer um fork deste repositório, fazer suas alterações e enviar um pull request.
