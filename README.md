@@ -1,6 +1,6 @@
-# API Node.js com MongoDB
+# API Node.js com MySQL
 
-Este é um exemplo de um projeto de API em Node.js utilizando o MongoDB com fins educativos. O objetivo deste projeto é demonstrar como criar uma API simples para gerenciar usuários. Você pode usar este projeto como referência para aprender os conceitos básicos de desenvolvimento de APIs com Node.js e MongoDB.
+Este é um exemplo de um projeto de API em Node.js utilizando o MySQL com fins educativos. O objetivo deste projeto é demonstrar como criar uma API simples para gerenciar usuários. Você pode usar este projeto como referência para aprender os conceitos básicos de desenvolvimento de APIs com Node.js e MySQL.
 
 ### Requisitos
 Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desenvolvimento:
@@ -72,4 +72,4 @@ Sinta-se à vontade para contribuir com melhorias, correções de bugs ou adicio
 ### Licença
 Este projeto é distribuído sob a licença MIT, o que significa que você pode usá-lo, modificá-lo e distribuí-lo livremente.
 
-Lembre-se de que este é apenas um projeto de exemplo com fins educativos e não é adequado para uso em ambientes de produção sem a devida segurança e otimizações. Certifique-se de seguir as melhores práticas de segurança e desempenho ao desenvolver sua própria aplicação em Node.js e MongoDB.
+Lembre-se de que este é apenas um projeto de exemplo com fins educativos e não é adequado para uso em ambientes de produção sem a devida segurança e otimizações. Certifique-se de seguir as melhores práticas de segurança e desempenho ao desenvolver sua própria aplicação em Node.js e MySQL.
