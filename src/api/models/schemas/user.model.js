@@ -1,31 +1,79 @@
-const mongoose = require("mongoose");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../../../database/connect');
 
-const userSchema = new mongoose.Schema({
+const User = sequelize.define('User', {
     firstName: {
-        type: String,
-        required: [true, "O campo primeiro nome é obrigatório."]
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: "O campo primeiro nome é obrigatório.",
+            },
+            notEmpty: {
+                msg: "O campo primeiro nome é obrigatório.",
+            },
+        },
     },
     lastName: {
-        type: String,
-        required: [true, "O campo sobrenome é obrigatório."]
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: "O campo sobrenome é obrigatório.",
+            },
+            notEmpty: {
+                msg: "O campo sobrenome é obrigatório.",
+            },
+        },
     },
     email: {
-        type: String,
-        index: true,
-        required: [true, "O campo e-mail é obrigatório."],
-        unique: [true, "E-mail já cadastrado"]
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+            msg: "E-mail já cadastrado",
+        },
+        validate: {
+            notNull: {
+                msg: "O campo e-mail é obrigatório.",
+            },
+            notEmpty: {
+                msg: "O campo e-mail é obrigatório.",
+            },
+            isEmail: {
+                msg: "O campo e-mail deve ser um e-mail válido.",
+            },
+        },
     },
     password: {
-        type: String,
-        required: [true, "O campo senha é obrigatório."],
-        minlength: [4, "A senha deve ter no mínimo 4 caracteres."]
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: "O campo senha é obrigatório.",
+            },
+            notEmpty: {
+                msg: "O campo senha é obrigatório.",
+            },
+            len: {
+                args: [4],
+                msg: "A senha deve ter no mínimo 4 caracteres.",
+            },
+        },
     },
     active: {
-        type: Boolean,
-        required: [true, "O campo ativo é obrigatório."],
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: "O campo ativo é obrigatório.",
+            },
+            notEmpty: {
+                msg: "O campo ativo é obrigatório.",
+            },
+        },
     },
+}, {
+    timestamps: true,
 });
 
-const UserModel = mongoose.model("User", userSchema);
-
-module.exports = UserModel;
+module.exports = User;

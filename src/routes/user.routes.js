@@ -109,7 +109,7 @@ router.get("/:id", async function (req, res, next) {
 /**
  * @swagger
  * /api/user/{id}:
- *   patch:
+ *   put:
  *     summary: Atualiza um usuário
  *     description: Atualiza um usuário com os dados fornecidos
  *     tags:
@@ -137,7 +137,7 @@ router.get("/:id", async function (req, res, next) {
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.patch("/:id", async function (req, res, next) {
+router.put("/:id", async function (req, res, next) {
     await controller.update(req, res, next);
 });
 

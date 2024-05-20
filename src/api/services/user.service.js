@@ -1,4 +1,4 @@
-const UserModel = require("../models/schemas/user.model");
+const User = require("../models/schemas/user.model");
 const BadRequestException = require("../models/exceptions/bad-request.exception");
 const NotFoundRequestException = require("../models/exceptions/not-found-request.exception");
 
@@ -9,61 +9,51 @@ class UserService {
         if (findByEmail) {
             throw new BadRequestException("E-mail já cadastrado");
         }
-
-        return await UserModel.create(data);
+        return await User.create(data);
     }
 
-    async read(filters) {
-        const { firstName, lastName, email, active } = filters;
-        const filterObject = {};
-        if (firstName) filterObject.firstName = firstName;
-        if (lastName) filterObject.lastName = lastName;
-        if (email) filterObject.email = email;
-        if (active !== undefined) filterObject.active = active;
+    async read(params) {
+        const { firstName, lastName, email, active } = params;
+        const filters = {};
 
-        return await UserModel.find(filterObject);
+        if (firstName) filters.firstName = firstName;
+        if (lastName) filters.lastName = lastName;
+        if (email) filters.email = email;
+        if (active !== undefined) filters.active = active;
+
+        return await User.findAll({ where: filters });
     }
 
     async readById(id) {
-        const findById = await UserModel.findById(id);
-        if (!findById) {
+        const user = await User.findByPk(id);
+        if (!user) {
             throw new NotFoundRequestException("Usuário não encontrado");
         }
-
-        return findById;
+        return user;
     }
 
     async readByEmailAndPassword(email, password) {
-        return await UserModel.findOne({ email, password });
+        return await User.findOne({ where: { email } });
     }
 
     async readByEmail(email) {
-        return await UserModel.findOne({ email });
+        return await User.findOne({ where: { email } });
     }
 
     async update(id, data) {
-        const findById = await this.readById(id);
-        if (!findById) {
-            throw new NotFoundRequestException("Usuário não encontrado");
-        }
-
-        if (findById.email != data?.email) {
+        const user = await this.readById(id);
+        if (user.email !== data?.email) {
             const findByEmail = await this.readByEmail(data.email);
-            if (findByEmail && findByEmail._id != findById._id) {
+            if (findByEmail && findByEmail.id !== user.id) {
                 throw new BadRequestException("E-mail já cadastrado");
             }
         }
-
-        return await UserModel.findByIdAndUpdate(id, data, { new: true });
+        return await user.update(data);
     }
 
     async delete(id) {
-        const findById = await UserModel.findById(id);
-        if (!findById) {
-            throw new NotFoundRequestException("Usuário não encontrado");
-        }
-
-        await UserModel.findByIdAndRemove(id);
+        const user = await this.readById(id);
+        await user.destroy();
     }
 }
 

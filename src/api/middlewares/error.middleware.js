@@ -7,7 +7,7 @@ const errorMap = {
 
 class ErrorMiddleware {
     static handle(err, req, res, next) {
-        (process.env.NODE_ENV === "debug") && console.error(err.stack);
+        (process.env.NODE_ENV === "development") && console.error(err.stack);
 
         if (err.name === 'ValidationError') {
             let messages = [];

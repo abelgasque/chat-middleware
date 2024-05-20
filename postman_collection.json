@@ -30,7 +30,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"joe@doe.com\",\r\n    \"password\": \"1234567\"\r\n}",
+							"raw": "{\r\n    \"username\": \"admin@example.com\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,7 +146,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/user?email=joe@doe.com",
+							"raw": "{{baseUrl}}/user?firstName=Admin",
 							"host": [
 								"{{baseUrl}}"
 							],
@@ -155,8 +155,8 @@
 							],
 							"query": [
 								{
-									"key": "email",
-									"value": "joe@doe.com"
+									"key": "firstName",
+									"value": "Admin"
 								}
 							]
 						}
@@ -204,11 +204,11 @@
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"active\": false\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Joe\",\r\n    \"lastName\": \"Doe\",\r\n    \"email\": \"joe2@doe.com\",\r\n    \"password\": \"1234567\",\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

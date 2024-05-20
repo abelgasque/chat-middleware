@@ -23,7 +23,17 @@ npm install
 
 3- Variáveis de ambiente necessárias estão no arquivo `.env-exemple` e precisa ser renomeado para `.env`.
 
-4- Inicie o servidor:
+4- Execute o seguinte comando para aplicar migrações e criar ou atualizar as tabelas no banco de dados:
+``` bash
+npx sequelize-cli db:migrate
+```
+
+5- Use o seguinte comando para adicionar dados iniciais ao banco de dados:
+``` bash
+npx sequelize-cli db:seed:all
+```
+
+6- Inicie o servidor:
 ``` bash
 npm run start:dev
 ```

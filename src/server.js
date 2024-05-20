@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
+const { connectToDatabase } = require("./database/connect");
 const ErrorMiddleware = require("./api/middlewares/error.middleware");
 const BearerAuthMiddleware = require("./api/middlewares/bearer-auth.middleware");
 
 const createApp = () => {
-    const connectToDatabase = require("./database/connect");
     connectToDatabase();
 
     const app = express();

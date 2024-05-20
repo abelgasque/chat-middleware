@@ -20,9 +20,7 @@ class UserController {
 
     read = async (req, res, next) => {
         try {
-            const { firstName, lastName, email, active } = req.query;
-            const filters = { firstName, lastName, email, active };
-            return res.status(200).json(await this.userService.read(filters));
+            return res.status(200).json(await this.userService.read(req.query));
         } catch (error) { next(error); }
     };
 

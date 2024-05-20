@@ -54,7 +54,7 @@ const swaggerOptions = {
           type: "object",
           required: ["firstName", "lastName", "email", "password", "active"],
           properties: {
-            email: {
+            username: {
               type: "string",
               format: "email",
               description: "Endereço de e-mail do usuário",
