@@ -12,8 +12,8 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 ### Configuração
 1- Clone o repositório (caso não tenha feito anteriormente):
 ``` bash
-git clone https://github.com/abelgasque/AbelGasque.Node.User.git
-cd AbelGasque.Node.User
+git clone https://github.com/abelgasque/node-user-api.git
+cd node-user-api
 ```
 
 2- Instale as dependências do projeto:
