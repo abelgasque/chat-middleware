@@ -5,14 +5,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "sucrase ./build -d ./build --transforms imports",
+    "build": "sucrase ./src -d ./build --transforms imports",
     "start": "nodemon src/index.js",
     "migrate:db": "npm run migrate && npm run seed",
     "migrate": "npx sequelize-cli db:migrate",
     "seed": "npx sequelize-cli db:seed:all"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "sucrase": "^3.35.0"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
