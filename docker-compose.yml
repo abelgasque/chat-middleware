@@ -1,35 +1,51 @@
 version: '3'
 services:
+  superset:
+    image: amancevice/superset
+    container_name: superset
+    environment:
+      SUPERSET_SECRET_KEY: '2a3e0ea0-2ef5-4928-ab52-22fb482e621e'
+      SUPERSET_ADMIN_USERNAME: '${SUPERSET_USERNAME}'
+      SUPERSET_ADMIN_PASSWORD: '${SUPERSET_PASSWORD}'
+      DATABASE_DB: ${SUPERSET_DATABASE}
+      DATABASE_HOST: ${DB_CONNECTION}
+      DATABASE_PASSWORD: ${DB_PASSWORD}
+      DATABASE_USER: ${DB_USERNAME}
+      DATABASE_PORT: ${DB_PORT}
+      DATABASE_DIALECT: ${DB_CONNECTION}
+    volumes:
+      - ./superset/superset_config.py:/etc/superset/superset_config.py
+      - ./superset/jwt_security.py:/etc/superset/jwt_security.py
+    ports:
+      - "8088:8088"
+
   mysql:
-    image: mysql:8.0
+    image: mysql
     container_name: mysql
-    restart: always
     command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_DATABASE: '${DB_DATABASE}'
       MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_USER: '${DB_USERNAME}'
-      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${SUPERSET_USERNAME}'
+      MYSQL_PASSWORD: '${SUPERSET_PASSWORD}'
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
     ports:
-      - "${DB_PORT}:${DB_PORT}"
-    volumes:
-      - db-mysql:/var/lib/mysql
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: node-api
-    restart: unless-stopped
-    env_file: ./.env
-    ports:
-      - "${NODE_PORT}:${NODE_PORT}"
-    environment:
-      - DB_SERVER=mysql
-    depends_on:
-      - mysql
-    stdin_open: true
-    tty: true
+      - "3306:3306"
 
-volumes:
-  db-mysql:
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    hostname: ${RABBITMQ_HOST}
+    environment:
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
