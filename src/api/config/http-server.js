@@ -1,11 +1,11 @@
 import express from "express";
-import { connectToDatabase } from "./database/connect.js";
-import ErrorMiddleware from "./middlewares/error.middleware.js";
-import BearerAuthMiddleware from "./middlewares/bearer-auth.middleware.js";
-import swaggerRoutes from "./api/routes/swagger.routes.js";
-import healthRoutes from "./api/routes/health.routes.js";
-import userRoutes from "./api/routes/user.routes.js";
-import authRoutes from "./api/routes/auth.routes.js";
+import { connectToDatabase } from "../../database/connect.js";
+import ErrorMiddleware from "../../middlewares/error.middleware.js";
+import BearerAuthMiddleware from "../../middlewares/bearer-auth.middleware.js";
+import swaggerRoutes from "../routes/swagger.routes.js";
+import healthRoutes from "../routes/health.routes.js";
+import userRoutes from "../routes/user.routes.js";
+import authRoutes from "../routes/auth.routes.js";
 
 const createApp = () => {
     const app = express();
