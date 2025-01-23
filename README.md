@@ -73,3 +73,13 @@ Sinta-se à vontade para contribuir com melhorias, correções de bugs ou adicio
 Este projeto é distribuído sob a licença MIT, o que significa que você pode usá-lo, modificá-lo e distribuí-lo livremente.
 
 Lembre-se de que este é apenas um projeto de exemplo com fins educativos e não é adequado para uso em ambientes de produção sem a devida segurança e otimizações. Certifique-se de seguir as melhores práticas de segurança e desempenho ao desenvolver sua própria aplicação em Node.js e MySQL.
+
+### Superset - ambiente loca
+### Executa o comando para fazer upgrade do banco de dados
+docker exec superset superset db upgrade
+
+### Cria o usuário administrador
+docker exec superset superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin
+
+### Inicializa o Superset
+docker exec superset superset init
