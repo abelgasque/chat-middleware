@@ -1,5 +1,5 @@
 import express from "express";
-import { connectToDatabase } from "../../database/connect.js";
+import { connectToDatabase } from "../services/db.connection.js";
 import ErrorMiddleware from "../../middlewares/error.middleware.js";
 import BearerAuthMiddleware from "../../middlewares/bearer-auth.middleware.js";
 import swaggerRoutes from "../routes/swagger.routes.js";
