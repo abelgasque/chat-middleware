@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "Application for user management",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start:dev": "nodemon src/index.js"
+    "build": "sucrase ./build -d ./build --transforms imports",
+    "start": "nodemon src/index.js",
+    "migrate:db": "npm run migrate && npm run seed",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
   },
-  "author": "Abel Gasque",
-  "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.1"
   },

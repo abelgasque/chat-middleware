@@ -1,7 +1,7 @@
-const express = require("express");
-const router = express.Router();
+import express from "express";
+import UserController from "../controllers/user.controller.js";
 
-const UserController = require("../api/controllers/user.controller");
+const router = express.Router();
 const controller = new UserController();
 
 /**
@@ -28,7 +28,7 @@ const controller = new UserController();
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.post("/", async function (req, res, next) {
+router.post("/", async (req, res, next) => {
     await controller.create(req, res, next);
 });
 
@@ -69,7 +69,7 @@ router.post("/", async function (req, res, next) {
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.get("/", async function (req, res, next) {
+router.get("/", async (req, res, next) => {
     await controller.read(req, res, next);
 });
 
@@ -102,7 +102,7 @@ router.get("/", async function (req, res, next) {
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", async (req, res, next) => {
     await controller.readById(req, res, next);
 });
 
@@ -137,7 +137,7 @@ router.get("/:id", async function (req, res, next) {
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.put("/:id", async function (req, res, next) {
+router.put("/:id", async (req, res, next) => {
     await controller.update(req, res, next);
 });
 
@@ -166,9 +166,8 @@ router.put("/:id", async function (req, res, next) {
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.delete("/:id", async function (req, res, next) {
+router.delete("/:id", async (req, res, next) => {
     await controller.delete(req, res, next);
 });
 
-
-module.exports = router;
+export default router;

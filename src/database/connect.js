@@ -1,5 +1,4 @@
-require('dotenv').config();
-const { Sequelize } = require('sequelize');
+import { Sequelize } from 'sequelize';
 
 const { NODE_ENV, DB_SERVER, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD } = process.env;
 
@@ -10,23 +9,27 @@ const config = {
     host: DB_SERVER,
     port: DB_PORT,
     dialect: 'mysql',
-    logging: process.env.NODE_ENV === 'development' ? console.log : false
+    logging: NODE_ENV === 'development' ? console.log : false
 };
 
 const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
     host: DB_SERVER,
     port: DB_PORT,
     dialect: 'mysql',
-    logging: process.env.NODE_ENV === 'development' ? console.log : false,
+    logging: NODE_ENV === 'development' ? console.log : false,
 });
 
 const connectToDatabase = async () => {
     try {
         await sequelize.authenticate();
-        NODE_ENV === 'development' && console.log('Conexão ao banco de dados realizada com sucesso!');
+        if (NODE_ENV === 'development') {
+            console.log('Conexão ao banco de dados realizada com sucesso!');
+        }
     } catch (error) {
-        NODE_ENV === 'development' && console.error('Ocorreu um erro ao se conectar com banco de dados:', error);
+        if (NODE_ENV === 'development') {
+            console.error('Ocorreu um erro ao se conectar com banco de dados:', error);
+        }
     }
 };
 
-module.exports = { sequelize, connectToDatabase, development: config, production: config };
+export { sequelize, connectToDatabase, config as development, config as production };

@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const UserService = require("../services/user.service");
+import jwt from "jsonwebtoken";
+import UserService from "../api/services/user.service.js";
 
 const userService = new UserService();
 const { JWT_SECRET } = process.env;
@@ -26,6 +26,6 @@ class BearerAuthMiddleware {
             next();
         });
     }
-};
+}
 
-module.exports = BearerAuthMiddleware;
+export default BearerAuthMiddleware;

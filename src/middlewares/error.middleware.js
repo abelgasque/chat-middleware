@@ -7,7 +7,9 @@ const errorMap = {
 
 class ErrorMiddleware {
     static handle(err, req, res, next) {
-        (process.env.NODE_ENV === "development") && console.error(err.stack);
+        if (process.env.NODE_ENV === "development") {
+            console.error(err.stack);
+        }
 
         if (err.name === 'ValidationError') {
             let messages = [];
@@ -23,9 +25,9 @@ class ErrorMiddleware {
             res.status(status).json(err.getErrorObject());
         }
         else {
-            res.status(500).json({ error: "Ocorreu um erro interno na aplicação.", message: err.message, });
+            res.status(500).json({ error: "Ocorreu um erro interno na aplicação.", message: err.message });
         }
     }
 }
 
-module.exports = ErrorMiddleware;
+export default ErrorMiddleware;

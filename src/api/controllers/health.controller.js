@@ -1,5 +1,3 @@
-const port = process.env.NODE_PORT || 9090;
-
 /**
  * @swagger
  * tags:
@@ -7,9 +5,13 @@ const port = process.env.NODE_PORT || 9090;
  *   description: Rotas de verificação de status da aplicação
  */
 class HealthController {
-    get = async (req, res, next) => {
-        return res.status(200).json({ success: true, message: `Aplicação executando na porta: ${port}` });
+    async get(req, res, next) {
+        try {
+            res.status(200).json({ message: "A aplicação está em execução." });
+        } catch (error) {
+            next(error);
+        }
     }
 }
 
-module.exports = HealthController;
+export default HealthController;

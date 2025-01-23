@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
-const AuthController = require("../api/controllers/auth.controller");
+import AuthController from "../controllers/auth.controller.js";
 const controller = new AuthController();
 
 /**
@@ -28,7 +28,7 @@ const controller = new AuthController();
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.post("/login", async function (req, res, next) {
+router.post("/login", async (req, res, next) => {
     await controller.login(req, res, next);
 });
 
@@ -56,8 +56,9 @@ router.post("/login", async function (req, res, next) {
  *       500:
  *         description: Ocorreu um erro interno na aplicação.
  */
-router.post("/refresh", async function (req, res, next) {
+router.post("/refresh", async (req, res, next) => {
     await controller.refresh(req, res, next);
 });
 
-module.exports = router;
+// Exportação no formato ES6
+export default router;

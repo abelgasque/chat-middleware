@@ -11,4 +11,4 @@ class UnauthorizedRequestException extends Error {
     }
 }
 
-module.exports = UnauthorizedRequestException;
+export default UnauthorizedRequestException;

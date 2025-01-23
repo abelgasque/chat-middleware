@@ -1,9 +1,8 @@
-const User = require("../models/schemas/user.model");
-const BadRequestException = require("../models/exceptions/bad-request.exception");
-const NotFoundRequestException = require("../models/exceptions/not-found-request.exception");
+import User from "../models/schemas/user.model.js";
+import BadRequestException from "../models/exceptions/bad-request.exception.js";
+import NotFoundRequestException from "../models/exceptions/not-found-request.exception.js";
 
 class UserService {
-
     async create(data) {
         const findByEmail = await this.readByEmail(data.email);
         if (findByEmail) {
@@ -57,4 +56,4 @@ class UserService {
     }
 }
 
-module.exports = UserService;
+export default UserService;

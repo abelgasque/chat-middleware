@@ -11,4 +11,4 @@ class ForbiddenRequestException extends Error {
     }
 }
 
-module.exports = ForbiddenRequestException;
+export default ForbiddenRequestException;

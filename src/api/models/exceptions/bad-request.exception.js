@@ -11,4 +11,4 @@ class BadRequestException extends Error {
     }
 }
 
-module.exports = BadRequestException;
+export default BadRequestException;

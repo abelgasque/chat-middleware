@@ -11,4 +11,4 @@ class NotFoundRequestException extends Error {
     }
 }
 
-module.exports = NotFoundRequestException;
+export default NotFoundRequestException;

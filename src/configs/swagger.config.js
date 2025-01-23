@@ -1,6 +1,10 @@
-const path = require("path");
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
+import path from 'path';
+import { fileURLToPath } from 'url';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -18,9 +22,6 @@ const swaggerOptions = {
           bearerFormat: 'JWT',
         },
       },
-    },
-    security: [{ bearerAuth: [] }],
-    components: {
       schemas: {
         User: {
           type: "object",
@@ -77,21 +78,12 @@ const swaggerOptions = {
           },
         },
       },
-      securitySchemes: {
-        bearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT',
-        },
-      },
     },
+    security: [{ bearerAuth: [] }],
   },
-  apis: [path.join(__dirname, "../routes/*.js")],
+  apis: [path.join(__dirname, "../api/routes/*.js")],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
-module.exports = {
-  serve: swaggerUi.serve,
-  setup: swaggerUi.setup(swaggerSpec),
-};
+export { swaggerUi, swaggerSpec };

@@ -1,10 +1,9 @@
-const UserService = require("../services/user.service");
-const { generateToken, generateRefreshToken } = require("../../helpers/token.helper");
-const BadRequestException = require("../models/exceptions/bad-request.exception");
-const UnauthorizedRequestException = require("../models/exceptions/unauthorized-request.exception");
+import UserService from "../services/user.service.js";
+import { generateToken, generateRefreshToken } from "../utils/token.helper.js";
+import BadRequestException from "../models/exceptions/bad-request.exception.js";
+import UnauthorizedRequestException from "../models/exceptions/unauthorized-request.exception.js";
 
 class AuthService {
-
     constructor() {
         this.userService = new UserService();
     }
@@ -30,4 +29,4 @@ class AuthService {
     }
 }
 
-module.exports = AuthService;
+export default AuthService;
