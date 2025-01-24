@@ -1,7 +1,7 @@
 import UserService from "../services/user.service.js";
 import { generateToken, generateRefreshToken } from "../utils/token.helper.js";
-import BadRequestException from "../models/exceptions/bad-request.exception.js";
-import UnauthorizedRequestException from "../models/exceptions/unauthorized-request.exception.js";
+import BadRequestException from "../utils/bad-request.exception.js";
+import UnauthorizedRequestException from "../utils/unauthorized-request.exception.js";
 
 class AuthService {
     constructor() {

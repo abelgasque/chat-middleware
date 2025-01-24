@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import UnauthorizedRequestException from "../models/exceptions/unauthorized-request.exception.js";
+import UnauthorizedRequestException from "./unauthorized-request.exception.js";
 
 const { JWT_SECRET, JWT_EXPIRE, JWT_REFRESH_SECRET, JWT_REFRESH_EXPIRE_DAY } = process.env;
 

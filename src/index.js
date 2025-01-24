@@ -1,5 +1,4 @@
 import "dotenv/config";
-
 import app from "./api/config/http-server.js";
 
 const port = process.env.NODE_PORT || 9090;

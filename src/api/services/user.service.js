@@ -1,6 +1,6 @@
-import User from "../models/schemas/user.model.js";
-import BadRequestException from "../models/exceptions/bad-request.exception.js";
-import NotFoundRequestException from "../models/exceptions/not-found-request.exception.js";
+import User from "../../database/schemas/user.model.js";
+import BadRequestException from "../utils/bad-request.exception.js";
+import NotFoundRequestException from "../utils/not-found-request.exception.js";
 
 class UserService {
     async create(data) {
