@@ -1,4 +1,5 @@
-FROM node:16.13.0
+FROM node:23
+
 WORKDIR /app
 
 COPY package*.json ./
@@ -6,5 +7,7 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+EXPOSE 80
 
 CMD ["node", "src/index.js"]

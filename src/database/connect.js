@@ -7,14 +7,14 @@ const dbConfig = {
     database: process.env.DB_DATABASE,
     host: process.env.DB_SERVER,
     port: process.env.DB_PORT,
-    dialect: process.env.DB_PROVIDER,
+    dialect: "mysql",
     logging: process.env.NODE_ENV === 'development' ? console.log : false
 }
 
 const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
     host: dbConfig.host,
     port: dbConfig.config,
-    dialect: dbConfig.dialect,
+    dialect: "mysql",
     logging: dbConfig.logging,
 });
 
