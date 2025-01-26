@@ -2,6 +2,15 @@
 
 Este é um exemplo de um projeto de API em Node.js utilizando o MySQL com fins educativos. O objetivo deste projeto é demonstrar como criar uma API simples para gerenciar usuários. Você pode usar este projeto como referência para aprender os conceitos básicos de desenvolvimento de APIs com Node.js e MySQL.
 
+## Imagem Docker Hub
+``` bash
+docker pull abelgasque/security-api
+```
+
+``` bash
+docker run -d -p 80:80 abelgasque/security-api
+```
+
 ### Requisitos
 Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desenvolvimento:
 
@@ -54,15 +63,8 @@ Você pode testar a API utilizando uma ferramenta como o Postman ou fazendo requ
 
 Para maior comodidade, na raiz do projeto, você encontrará o arquivo `postman_collection.json` que contém todas as requisições pré-configuradas para o Postman. Basta importar este arquivo no aplicativo do Postman para começar a testar a API imediatamente. Isso facilitará a sua interação com os endpoints e permitirá que você explore todas as funcionalidades da API de forma mais eficiente.
 
-## Implantar Aplicação em Ambiente de Desenvolvimento com Docker
 
-Para implantar sua aplicação em um ambiente de desenvolvimento usando Docker basta executar o comando abaixo na raiz do projeto:
-
-``` bash
-docker-compose up -d
-```
-
-Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 9090 do contêiner para a porta 9090 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost:9090.
+Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 80 do contêiner para a porta 80 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost.
 
 Com esses passos, sua aplicação estará implantada e em execução em um ambiente de desenvolvimento Docker, pronto para ser testada e depurada conforme necessário. Certifique-se de adaptar os comandos e as configurações conforme apropriado para o seu projeto específico.
 
@@ -73,13 +75,3 @@ Sinta-se à vontade para contribuir com melhorias, correções de bugs ou adicio
 Este projeto é distribuído sob a licença MIT, o que significa que você pode usá-lo, modificá-lo e distribuí-lo livremente.
 
 Lembre-se de que este é apenas um projeto de exemplo com fins educativos e não é adequado para uso em ambientes de produção sem a devida segurança e otimizações. Certifique-se de seguir as melhores práticas de segurança e desempenho ao desenvolver sua própria aplicação em Node.js e MySQL.
-
-### Superset - ambiente loca
-### Executa o comando para fazer upgrade do banco de dados
-docker exec superset superset db upgrade
-
-### Cria o usuário administrador
-docker exec superset superset fab create-admin --username admin --firstname Superset --lastname Admin --email admin@superset.com --password admin
-
-### Inicializa o Superset
-docker exec superset superset init
