@@ -44,7 +44,7 @@ npx sequelize-cli db:seed:all
 
 6- Inicie o servidor:
 ``` bash
-npm run start:dev
+npm run start
 ```
 
 Agora, o servidor estará em execução na porta 9090 (ou na porta que você especificou no arquivo index.js).
