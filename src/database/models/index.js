@@ -1,12 +1,6 @@
-import { Sequelize } from "sequelize";
-import { sequelize } from "../connect.js";
-import User from "./user.js";
+import { sequelize } from '../connect.js';
+import createUserModel from './user.js';
 
-const db = {};
+const User = createUserModel(sequelize);
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
-
-db.User = User(sequelize);
-
-export default db;
+export { User };

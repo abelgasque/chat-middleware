@@ -37,7 +37,7 @@ const User = (sequelize) => {
       allowNull: true,
     },
   }, {
-    tableName: "users",
+    tableName: "Users",
     timestamps: true,
     paranoid: true,
   });

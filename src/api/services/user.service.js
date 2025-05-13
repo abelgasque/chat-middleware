@@ -1,4 +1,4 @@
-import User from "../../database/models/user.js";
+import { User } from "../../database/models/index.js";
 import BadRequestException from "../utils/bad-request.exception.js";
 import NotFoundRequestException from "../utils/not-found-request.exception.js";
 
