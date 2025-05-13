@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    ports:
+      - "3000:80"
+    environment:
+      NODE_ENV: development
+      DB_SERVER: mysql
+      DB_PORT: 3306
+      DB_DATABASE: core_db
+      DB_USERNAME: root
+      DB_PASSWORD: root
+    depends_on:
+      - mysql
+    networks:
+      - production
+
+  superset:
+    image: amancevice/superset
+    container_name: superset
+    environment:
+      SUPERSET_SECRET_KEY: '2a3e0ea0-2ef5-4928-ab52-22fb482e621e'
+      SUPERSET_ADMIN_USERNAME: 'admin'
+      SUPERSET_ADMIN_PASSWORD: 'admin'
+      DATABASE_URI: 'mysql://root:root@mysql:3306/superset_db'
+    volumes:
+      - ./superset/superset_config.py:/etc/superset/superset_config.py
+      - ./superset/jwt_security.py:/etc/superset/jwt_security.py
+    ports:
+      - "8088:8088"
+    depends_on:
+      - mysql
+    networks:
+      - production
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_DATABASE: 'core_db'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - production
+
+networks:
+  production:
+    driver: bridge
+
+volumes:
+  db-data:
