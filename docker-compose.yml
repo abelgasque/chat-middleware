@@ -1,7 +1,5 @@
-version: '3.8'
-
 services:
-  api:
+  container:
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,41 +7,41 @@ services:
     ports:
       - "8080:8080"
     environment:
-      NODE_ENV: development
-      NODE_PORT: 8080
-      JWT_SECRET: 3a1f8e4a6b9c2d5f8e1a7b4c9d2e5f8a
-      JWT_EXPIRE: 10800
-      JWT_REFRESH_SECRET: 81e7ca90-5f8d-42fc-98b5-0ce062dde2ad
-      JWT_REFRESH_EXPIRE_DAY: 1
-      DB_SERVER: mysql
-      DB_PORT: 3306
-      DB_DATABASE: core_db
-      DB_USERNAME: root
-      DB_PASSWORD: root
+      NODE_ENV: ${NODE_ENV}
+      NODE_PORT: ${NODE_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRE: ${JWT_EXPIRE}
+      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
+      JWT_REFRESH_EXPIRE_DAY: ${JWT_REFRESH_EXPIRE_DAY}
+      DB_SERVER: ${DB_SERVER}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       - mysql
     networks:
       - production
+    env_file:
+      - .env
 
   mysql:
     image: mysql:8.0
     container_name: security-api-mysql
+    command: --default-authentication-plugin=mysql_native_password
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
-      MYSQL_DATABASE: 'core_db'
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'admin'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
     ports:
       - "3306:3306"
-    volumes:
-      - db-data:/var/lib/mysql
+    env_file:
+      - .env
     networks:
       - production
 
 networks:
   production:
     driver: bridge
-
-volumes:
-  db-data:
