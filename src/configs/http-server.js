@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { connectToDatabase } from "../database/connect.js";
 import ErrorMiddleware from "../middlewares/error.middleware.js";
 import BearerAuthMiddleware from "../middlewares/bearer-auth.middleware.js";
@@ -9,6 +10,12 @@ import authRoutes from "../api/routes/auth.routes.js";
 
 const createApp = () => {
     const app = express();
+
+    app.use(cors({
+        origin: process.env.CORS_ORIGIN,
+        credentials: true
+    }));
+
     app.use(express.json());
     
     connectToDatabase();
@@ -24,4 +31,4 @@ const createApp = () => {
     return app;
 };
 
-export default createApp;
+export default createApp;   
