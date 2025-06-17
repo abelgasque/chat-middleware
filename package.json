@@ -1,7 +1,7 @@
 {
   "name": "user-api",
-  "version": "1.0.0",
   "description": "Application for user management",
+  "version": "1.0.0",
   "main": "index.js",
   "type": "module",
   "scripts": {
