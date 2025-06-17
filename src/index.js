@@ -6,6 +6,8 @@ const port = process.env.NODE_PORT || 9090;
 
 await connectToDatabase();
 
+const server = app();
+
 server.listen(port, () => {
     if (process.env.NODE_ENV === "development") {
         console.log(`Aplicação executando em: http://localhost:${port}`);
