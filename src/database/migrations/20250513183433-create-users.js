@@ -21,17 +21,37 @@ export async function up(queryInterface, Sequelize) {
       type: Sequelize.STRING,
       allowNull: true,
     },
-    active: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
+    activeAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
+    blockedAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
+    nuLogged: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
+    loggedAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
+    nuRefreshed: {
+      type: Sequelize.INTEGER,
+      allowNull: true,
+    },
+    refreshedAt: {
+      type: Sequelize.DATE,
+      allowNull: true,
     },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
     },
     updatedAt: {
-      allowNull: false,
       type: Sequelize.DATE,
+      allowNull: true,
     },
     deletedAt: {
       type: Sequelize.DATE,

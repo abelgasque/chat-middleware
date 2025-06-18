@@ -20,9 +20,29 @@ const User = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    active: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
+    activeAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    blockedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    nuLogged: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    loggedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    nuRefreshed: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    refreshedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -30,7 +50,7 @@ const User = (sequelize) => {
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     deletedAt: {
       type: DataTypes.DATE,
