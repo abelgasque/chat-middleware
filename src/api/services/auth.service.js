@@ -14,8 +14,12 @@ class AuthService {
             throw new UnauthorizedRequestException("Credenciais inválidas");
         }
 
-        if (!user.active) {
+        if (!user.activeAt) {
             throw new BadRequestException("Usuário inátivo");
+        }
+
+        if (user.blockedAt) {
+            throw new BadRequestException("Usuário bloqueado");
         }
 
         return generateToken(user.email);
