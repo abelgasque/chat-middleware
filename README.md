@@ -9,20 +9,20 @@ docker-compose up -d
 
 ## Ambiente com imagem docker
 ``` bash
-docker build -t security-api .
+docker build -t chat-middleware .
 ```
 
 ``` bash
-docker run -d --env-file .env -p 8080:8080 --name container-security-api security-api
+docker run -d --env-file .env -p 8080:8080 --name container-chat-middleware chat-middleware
 ```
 
 ## Imagem Docker Hub
 ``` bash
-docker pull abelgasque/security-api
+docker pull abelgasque/chat-middleware
 ```
 
 ``` bash
-docker run -d -p 80:80 abelgasque/security-api
+docker run -d --env-file .env -p 8080:8080 abelgasque/chat-middleware
 ```
 
 ### Requisitos
@@ -35,8 +35,8 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 ### Configuração
 1- Clone o repositório (caso não tenha feito anteriormente):
 ``` bash
-git clone https://github.com/abelgasque/security-api.git
-cd security-api
+git clone https://github.com/abelgasque/chat-middleware.git
+cd chat-middleware
 ```
 
 2- Instale as dependências do projeto:
