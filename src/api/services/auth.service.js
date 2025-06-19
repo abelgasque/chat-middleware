@@ -22,7 +22,7 @@ class AuthService {
             throw new BadRequestException("Usuário bloqueado");
         }
 
-        return generateToken(user.email);
+        return generateToken(user.name, user.email);
     }
 
     async refresh(token) {
