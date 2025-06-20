@@ -1,4 +1,5 @@
 import AuthService from "../services/auth.service.js";
+import UserService from "../services/user.service.js";
 
 /**
  * @swagger
@@ -10,6 +11,7 @@ class AuthController {
 
     constructor() {
         this.authService = new AuthService();
+        this.userService = new UserService();
     }
 
     login = async (req, res, next) => {
