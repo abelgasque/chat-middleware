@@ -60,5 +60,33 @@ router.post("/refresh", async (req, res, next) => {
     await controller.refresh(req, res, next);
 });
 
+/**
+ * @swagger
+ * /api/auth/user:
+ *   post:
+ *     summary: Criar usuário de autenticação
+ *     description: Criar usuário inicial para autenticação
+ *     tags:
+ *       - [ Auth ]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: Usuário criado com sucesso.
+ *       400:
+ *         description: Requisição inválida.
+ *       401:
+ *         description: Credenciais de autenticação inválidas.
+ *       500:
+ *         description: Ocorreu um erro interno na aplicação.
+ */
+router.post("/user", async (req, res, next) => {
+    await controller.create(req, res, next);
+});
+
 // Exportação no formato ES6
 export default router;

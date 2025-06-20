@@ -31,7 +31,8 @@ export async function up(queryInterface, Sequelize) {
     },
     nuLogged: {
       type: Sequelize.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      defaultValue: 0,
     },
     loggedAt: {
       type: Sequelize.DATE,
@@ -39,7 +40,8 @@ export async function up(queryInterface, Sequelize) {
     },
     nuRefreshed: {
       type: Sequelize.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      defaultValue: 0,
     },
     refreshedAt: {
       type: Sequelize.DATE,

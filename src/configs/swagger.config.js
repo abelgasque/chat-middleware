@@ -25,15 +25,12 @@ const swaggerOptions = {
       schemas: {
         User: {
           type: "object",
-          required: ["firstName", "lastName", "email", "password", "active"],
+          required: ["name", "email", "password"],
           properties: {
-            firstName: {
+            name: {
               type: "string",
-              description: "Primeiro nome do usuário",
-            },
-            lastName: {
-              type: "string",
-              description: "Sobrenome do usuário",
+              format: "name",
+              description: "Endereço de e-mail do usuário",
             },
             email: {
               type: "string",
@@ -45,19 +42,15 @@ const swaggerOptions = {
               format: "password",
               description: "Senha do usuário (mínimo de 7 caracteres)",
             },
-            active: {
-              type: "boolean",
-              description: "Indica se o usuário está ativo ou não",
-            },
           },
         },
         UserAuth: {
           type: "object",
-          required: ["firstName", "lastName", "email", "password", "active"],
+          required: ["username", "password"],
           properties: {
             username: {
               type: "string",
-              format: "email",
+              format: "username",
               description: "Endereço de e-mail do usuário",
             },
             password: {

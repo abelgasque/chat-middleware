@@ -31,10 +31,6 @@ class UserService {
         return user;
     }
 
-    async readByEmailAndPassword(email, password) {
-        return await User.findOne({ where: { email } });
-    }
-
     async readByEmail(email) {
         return await User.findOne({ where: { email } });
     }

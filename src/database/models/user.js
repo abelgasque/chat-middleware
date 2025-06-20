@@ -30,7 +30,8 @@ const User = (sequelize) => {
     },
     nuLogged: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      defaultValue: 0,
     },
     loggedAt: {
       type: DataTypes.DATE,
@@ -38,7 +39,8 @@ const User = (sequelize) => {
     },
     nuRefreshed: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
+      defaultValue: 0,
     },
     refreshedAt: {
       type: DataTypes.DATE,

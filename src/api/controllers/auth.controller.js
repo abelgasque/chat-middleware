@@ -25,6 +25,17 @@ class AuthController {
             return res.status(200).json(await this.authService.refresh(refresh_token));
         } catch (error) { next(error); }
     };
+
+    create = async (req, res, next) => {
+        try {
+            const { name, email, password } = req.body
+            return res.status(201).json(await this.userService.create({
+                name, email, password
+            }));
+        } catch (error) {
+            next(error);
+        }
+    };
 }
 
 export default AuthController;
