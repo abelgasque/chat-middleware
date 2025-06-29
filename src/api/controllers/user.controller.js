@@ -25,7 +25,7 @@ class UserController {
                 return res.status(201).json(ApiResponse.success("Evento processado com sucesso"));
             }
 
-            await this.userService.create();
+            await this.userService.create(user);
             return res.status(201).json(ApiResponse.created());
         } catch (error) {
             next(error);
