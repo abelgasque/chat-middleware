@@ -7,11 +7,37 @@ Este é um exemplo de um projeto de API em Node.js utilizando o MySQL com fins e
 docker-compose up -d
 ```
 
-## Ambiente com imagem docker
+## ✅ Ambiente com Imagens Docker
+
+1 - Subir container do MySQL
+``` bash
+docker run -d \
+  --name container-mysql \
+  -e MYSQL_ROOT_PASSWORD=root \
+  -e MYSQL_DATABASE=core_db \
+  -e MYSQL_USER=admin \
+  -e MYSQL_PASSWORD=admin \
+  -p 3306:3306 \
+  mysql:8.0 \
+  --default-authentication-plugin=mysql_native_password
+```
+
+2 - Subir container do RabbitMQ
+``` bash
+docker run -d --hostname rabbitmq-host --name container-rabbitmq -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+
+3 - Subir container do Redis
+``` bash
+docker run -d --name container-redis -p 6379:6379 redis:7.2-alpine
+```
+
+4 - Gerando imagem Docker
 ``` bash
 docker build -t chat-middleware .
 ```
 
+5 - Iniciando imagem da aplicação
 ``` bash
 docker run -d --env-file .env -p 8080:8080 --name container-chat-middleware chat-middleware
 ```
@@ -61,7 +87,7 @@ npx sequelize-cli db:seed:all
 npm run start
 ```
 
-Agora, o servidor estará em execução na porta 9090 (ou na porta que você especificou no arquivo index.js).
+Agora, o servidor estará em execução na porta 8080 (ou na porta que você especificou no arquivo index.js).
 
 ### Endpoints
 A API possui os seguintes endpoints para gerenciar usuários:
@@ -78,7 +104,7 @@ Você pode testar a API utilizando uma ferramenta como o Postman ou fazendo requ
 Para maior comodidade, na raiz do projeto, você encontrará o arquivo `postman_collection.json` que contém todas as requisições pré-configuradas para o Postman. Basta importar este arquivo no aplicativo do Postman para começar a testar a API imediatamente. Isso facilitará a sua interação com os endpoints e permitirá que você explore todas as funcionalidades da API de forma mais eficiente.
 
 
-Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 80 do contêiner para a porta 80 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost.
+Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 8080 do contêiner para a porta 8080 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost:8080.
 
 Com esses passos, sua aplicação estará implantada e em execução em um ambiente de desenvolvimento Docker, pronto para ser testada e depurada conforme necessário. Certifique-se de adaptar os comandos e as configurações conforme apropriado para o seu projeto específico.
 
