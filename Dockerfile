@@ -1,12 +1,19 @@
-FROM node:23
+FROM node:23 AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm install
+RUN npm ci --omit=dev
 
 COPY . .
+
+FROM node:23-slim
+
+WORKDIR /app
+
+COPY --from=builder /app .
+
+RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
 EXPOSE 8080
 

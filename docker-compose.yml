@@ -1,3 +1,4 @@
+version: '3'
 services:
   container:
     build:
@@ -25,6 +26,8 @@ services:
     ports:
       - "${RABBITMQ_PORT}:${RABBITMQ_PORT}"
       - "15672:15672"
+    networks:
+      - production
 
   postgres:
     image: postgres:15
@@ -35,8 +38,31 @@ services:
       POSTGRES_DB: ${DB_DATABASE}
     ports:
       - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     networks:
       - production
+
+  n8n:
+    image: n8nio/n8n
+    container_name: chat-middlware-n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_SECURE_COOKIE=false
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=${DB_SERVER}
+      - DB_POSTGRESDB_PORT=${DB_PORT}
+      - DB_POSTGRESDB_DATABASE=postgres
+      - DB_POSTGRESDB_USER=${DB_USERNAME}
+      - DB_POSTGRESDB_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - postgres
+    networks:
+      - production
+
+volumes:
+  pgdata:
 
 networks:
   production:
