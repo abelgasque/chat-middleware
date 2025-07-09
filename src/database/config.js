@@ -8,7 +8,7 @@ export default {
     database: process.env.DB_DATABASE,
     host: process.env.DB_SERVER,
     port: process.env.DB_PORT,
-    dialect: "mysql",
+    dialect: "postgres",
   },
   production: {
     username: process.env.DB_USERNAME,
@@ -16,6 +16,6 @@ export default {
     database: process.env.DB_DATABASE,
     host: process.env.DB_SERVER,
     port: process.env.DB_PORT,
-    dialect: "mysql",
+    dialect: "postgres",
   },
 };

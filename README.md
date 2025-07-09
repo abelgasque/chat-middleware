@@ -9,17 +9,14 @@ docker-compose up -d
 
 ## ✅ Ambiente com Imagens Docker
 
-1 - Subir container do MySQL
+1 - Subir container do PostgresSQL
 ``` bash
-docker run -d \
-  --name container-mysql \
-  -e MYSQL_ROOT_PASSWORD=root \
-  -e MYSQL_DATABASE=core_db \
-  -e MYSQL_USER=admin \
-  -e MYSQL_PASSWORD=admin \
-  -p 3306:3306 \
-  mysql:8.0 \
-  --default-authentication-plugin=mysql_native_password
+docker run --name container-postgres \
+  -e POSTGRES_USER=admin \
+  -e POSTGRES_PASSWORD=admin \
+  -e POSTGRES_DB=CoreDB \
+  -p 5432:5432 \
+  -d postgres
 ```
 
 2 - Subir container do RabbitMQ

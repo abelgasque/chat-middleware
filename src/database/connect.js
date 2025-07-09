@@ -7,7 +7,7 @@ const dbConfig = {
   database: process.env.DB_DATABASE,
   host: process.env.DB_SERVER,
   port: Number(process.env.DB_PORT),
-  dialect: "mysql",
+  dialect: "postgres",
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
 };
 

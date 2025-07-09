@@ -3,42 +3,38 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: security-api-container
+    container_name: chat-middlware-container
     ports:
-      - "8080:8080"
-    environment:
-      NODE_ENV: ${NODE_ENV}
-      NODE_PORT: ${NODE_PORT}
-      JWT_SECRET: ${JWT_SECRET}
-      JWT_EXPIRE: ${JWT_EXPIRE}
-      JWT_REFRESH_SECRET: ${JWT_REFRESH_SECRET}
-      JWT_REFRESH_EXPIRE_DAY: ${JWT_REFRESH_EXPIRE_DAY}
-      DB_SERVER: ${DB_SERVER}
-      DB_PORT: ${DB_PORT}
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
+      - "${NODE_PORT}:${NODE_PORT}"
     depends_on:
-      - mysql
+      - postgres
+      - rabbitmq
     networks:
       - production
     env_file:
       - .env
 
-  mysql:
-    image: mysql:8.0
-    container_name: security-api-mysql
-    command: --default-authentication-plugin=mysql_native_password
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: chat-middlware-rabbitmq
+    hostname: ${RABBITMQ_HOST}
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'admin'
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
     ports:
-      - "3306:3306"
-    env_file:
-      - .env
+      - "${RABBITMQ_PORT}:${RABBITMQ_PORT}"
+      - "15672:15672"
+
+  postgres:
+    image: postgres:15
+    container_name: chat-middlware-postgres
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     networks:
       - production
 

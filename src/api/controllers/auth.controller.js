@@ -30,7 +30,7 @@ class AuthController {
 
     create = async (req, res, next) => {
         try {
-            const { name, email, password } = req.body
+            const { name, email, password } = req.body;
             return res.status(201).json(await this.userService.create({
                 name, email, password
             }));
