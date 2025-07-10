@@ -7,38 +7,6 @@ Este é um exemplo de um projeto de API em Node.js utilizando o MySQL com fins e
 docker-compose up -d
 ```
 
-## ✅ Ambiente com Imagens Docker
-
-1 - Subir container do PostgresSQL
-``` bash
-docker run --name container-postgres \
-  -e POSTGRES_USER=admin \
-  -e POSTGRES_PASSWORD=admin \
-  -e POSTGRES_DB=CoreDB \
-  -p 5432:5432 \
-  -d postgres
-```
-
-2 - Subir container do RabbitMQ
-``` bash
-docker run -d --hostname rabbitmq-host --name container-rabbitmq -e RABBITMQ_DEFAULT_USER=guest -e RABBITMQ_DEFAULT_PASS=guest -p 5672:5672 -p 15672:15672 rabbitmq:3-management
-```
-
-3 - Subir container do Redis
-``` bash
-docker run -d --name container-redis -p 6379:6379 redis:7.2-alpine
-```
-
-4 - Gerando imagem Docker
-``` bash
-docker build -t chat-middleware .
-```
-
-5 - Iniciando imagem da aplicação
-``` bash
-docker run -d --env-file .env -p 8080:8080 --name container-chat-middleware chat-middleware
-```
-
 ## Imagem Docker Hub
 ``` bash
 docker pull abelgasque/chat-middleware
@@ -55,7 +23,7 @@ Certifique-se de ter os seguintes requisitos instalados em seu ambiente de desen
 - Docker
 - Git (opcional, se você quiser clonar este repositório)
 
-### Configuração
+### Iniciar ambiente local
 1- Clone o repositório (caso não tenha feito anteriormente):
 ``` bash
 git clone https://github.com/abelgasque/chat-middleware.git
@@ -67,21 +35,22 @@ cd chat-middleware
 npm install
 ```
 
+3- Inicie o servidor:
+``` bash
+npm run start
+```
+
 3- Variáveis de ambiente necessárias estão no arquivo `.env-exemple` e precisa ser renomeado para `.env`.
 
-4- Execute o seguinte comando para aplicar migrações e criar ou atualizar as tabelas no banco de dados:
+### Migracao inicial
+1- Execute o seguinte comando para aplicar migrações e criar ou atualizar as tabelas no banco de dados:
 ``` bash
 npx sequelize-cli db:migrate
 ```
 
-5- Use o seguinte comando para adicionar dados iniciais ao banco de dados:
+2- Use o seguinte comando para adicionar dados iniciais ao banco de dados:
 ``` bash
 npx sequelize-cli db:seed:all
-```
-
-6- Inicie o servidor:
-``` bash
-npm run start
 ```
 
 Agora, o servidor estará em execução na porta 8080 (ou na porta que você especificou no arquivo index.js).
@@ -99,7 +68,6 @@ A API possui os seguintes endpoints para gerenciar usuários:
 Você pode testar a API utilizando uma ferramenta como o Postman ou fazendo requisições HTTP a partir de qualquer cliente. Certifique-se de seguir os padrões RESTful para interagir com os endpoints.
 
 Para maior comodidade, na raiz do projeto, você encontrará o arquivo `postman_collection.json` que contém todas as requisições pré-configuradas para o Postman. Basta importar este arquivo no aplicativo do Postman para começar a testar a API imediatamente. Isso facilitará a sua interação com os endpoints e permitirá que você explore todas as funcionalidades da API de forma mais eficiente.
-
 
 Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 8080 do contêiner para a porta 8080 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost:8080.
 
