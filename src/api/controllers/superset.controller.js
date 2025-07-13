@@ -14,7 +14,8 @@ class SupersetController {
 
     guestToken = async (req, res, next) => {
         try {
-            return res.status(200).json(await this.supersetService.getGuestToken());
+            const { id, clauses } = req.body;
+            return res.status(200).json(await this.supersetService.getGuestToken(id, clauses));
         } catch (error) {
             next(error);
         }

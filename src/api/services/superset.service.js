@@ -8,7 +8,7 @@ const {
 class SupersetService {
 
     async getAccessToken() {
-        const response = await fetch(SUPERSET_BASE_URL, {
+        const response = await fetch(`${SUPERSET_BASE_URL}/api/v1/security/login`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -24,15 +24,14 @@ class SupersetService {
         return await response.json();
     }
 
-    async getGuestToken() {
-        const accessToken = null;
-        console.log(await getAccessToken());
-        const response = await fetch(SUPERSET_BASE_URL, {
+    async getGuestToken(id, clauses) {
+        const accessToken = await this.getAccessToken();
+        const response = await fetch(`${SUPERSET_BASE_URL}/api/v1/security/guest_token`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${accessToken}`,
+                'Authorization': `Bearer ${accessToken.access_token}`,
             },
             body: JSON.stringify({
                 user: {
@@ -40,8 +39,10 @@ class SupersetService {
                     last_name: NODE_ENV,
                     username: SUPERSET_USERNAME,
                 },
-                resources: [],
-                rls: [],
+                resources: [
+                    { type: "dashboard", id: id }
+                ],
+                rls: clauses,
                 type: 'guest',
             }),
         });
