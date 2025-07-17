@@ -1,8 +1,10 @@
 'use strict';
+import crypto from 'crypto';
 
 export async function up(queryInterface, Sequelize) {
   await queryInterface.bulkInsert('Users', [
     {
+      guid: crypto.randomUUID(),
       name: 'Admin',
       email: 'admin@admin.com',
       password: '12345678',

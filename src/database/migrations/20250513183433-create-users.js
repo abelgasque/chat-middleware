@@ -8,6 +8,12 @@ export async function up(queryInterface, Sequelize) {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
+    guid: {
+      type: Sequelize.UUID,
+      defaultValue: Sequelize.UUIDV4,
+      allowNull: false,
+      unique: true,
+    },
     name: {
       type: Sequelize.STRING,
       allowNull: false,

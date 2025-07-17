@@ -7,6 +7,12 @@ const User = (sequelize) => {
       autoIncrement: true,
       primaryKey: true,
     },
+    guid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      unique: true,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
