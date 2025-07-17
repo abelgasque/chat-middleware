@@ -70,6 +70,24 @@ const swaggerOptions = {
             }
           },
         },
+        Tenant: {
+          type: "object",
+          required: ["name", "database", "domain"],
+          properties: {
+            name: {
+              type: "string",
+              description: "Nome do tenant"
+            },
+            database: {
+              type: "string",
+              description: "Nome do banco de dados associado ao tenant"
+            },
+            domain: {
+              type: "string",
+              description: "Domínio do tenant (ex: empresa.com)"
+            }
+          }
+        },
       },
     },
     security: [{ bearerAuth: [] }],

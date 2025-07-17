@@ -6,6 +6,7 @@ import BearerAuthMiddleware from "../middlewares/bearer-auth.middleware.js";
 import swaggerRoutes from "../api/routes/swagger.routes.js";
 import healthRoutes from "../api/routes/health.routes.js";
 import userRoutes from "../api/routes/user.routes.js";
+import tenantRoutes from "../api/routes/tenant.routes.js";
 import supersetRoutes from "../api/routes/superset.routes.js";
 import authRoutes from "../api/routes/auth.routes.js";
 
@@ -25,6 +26,7 @@ const createApp = () => {
     app.use("/", swaggerRoutes);
     app.use("/api/health", healthRoutes);
     app.use("/api/user", authMiddleware.authenticate, userRoutes);
+    app.use("/api/tenant", authMiddleware.authenticate, tenantRoutes);
     app.use("/api/superset", authMiddleware.authenticate, supersetRoutes);
     app.use("/api/auth", authRoutes);
 
