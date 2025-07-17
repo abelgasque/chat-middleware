@@ -1,18 +1,38 @@
 'use strict';
 import crypto from 'crypto';
 
+const {
+  NODE_ENV
+} = process.env;
+
 export async function up(queryInterface, Sequelize) {
-  await queryInterface.bulkInsert('Tenants', [
+  const tenants = [
     {
       guid: crypto.randomUUID(),
-        name: 'Default Tenant',
-        domain: 'default.local',
-        database: 'tenant_default_db',
+      name: 'Default Tenant',
+      domain: 'default.local',
+      database: 'tenant_default_db',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      deletedAt: null,
+    },
+  ];
+
+  if (NODE_ENV === "development") {
+    for (let i = 0; i < 50; i++) {
+      tenants.push({
+        guid: crypto.randomUUID(),
+        name: `Default Tenant v${i}`,
+        domain: `default.v${i}`,
+        database: `tenant_default_v${i}_db`,
         createdAt: new Date(),
         updatedAt: new Date(),
-        deletedAt: null,
-      },
-  ], {});
+        deletedAt: (i < 25) ? null : new Date(),
+      });
+    }
+  }
+
+  await queryInterface.bulkInsert('Tenants', tenants, {});
 }
 
 export async function down(queryInterface, Sequelize) {
