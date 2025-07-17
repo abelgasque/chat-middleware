@@ -1,13 +1,9 @@
 import { Tenant } from "../../database/models/index.js";
-import { getTenantSequelize } from "../../database/connect-tenant.js";
 import NotFoundRequestException from "../utils/not-found-request.exception.js";
 
 class TenantsService {
     async create(data) {
-
         const tenant = await Tenant.create(data);
-        getTenantSequelize(data.database);
-
         return tenant;
     }
 
