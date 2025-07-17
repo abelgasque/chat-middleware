@@ -55,6 +55,18 @@ npx sequelize-cli db:seed:all
 
 Agora, o servidor estará em execução na porta 8080 (ou na porta que você especificou no arquivo index.js).
 
+### Novas migracoes
+
+Criar nova migracao
+``` bash
+npx sequelize-cli migration:generate --name create-model
+```
+
+Criar novo seed
+``` bash
+npx sequelize-cli seed:generate --name create-model
+```
+
 ### Endpoints
 A API possui os seguintes endpoints para gerenciar usuários:
 
