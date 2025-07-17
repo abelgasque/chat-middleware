@@ -12,7 +12,7 @@ class TenantsService {
     }
 
     async readById(id) {
-        const tenant = await Tenant.findByPk(id);
+        const tenant = await Tenant.findOne({ where: { guid: id } });
         if (!tenant) throw new NotFoundRequestException("Tenant não encontrado");
         return tenant;
     }

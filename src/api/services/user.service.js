@@ -24,7 +24,7 @@ class UserService {
     }
 
     async readById(id) {
-        const user = await User.findByPk(id);
+        const user = await User.findOne({ where: { guid: id } });
         if (!user) {
             throw new NotFoundRequestException("Usuário não encontrado");
         }
