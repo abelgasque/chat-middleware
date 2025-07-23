@@ -10,16 +10,25 @@ import tenantRoutes from "../api/routes/tenant.routes.js";
 import supersetRoutes from "../api/routes/superset.routes.js";
 import authRoutes from "../api/routes/auth.routes.js";
 
+const allowedOrigins = process.env.CORS_ORIGINS.split(',');
+
 const createApp = () => {
     const app = express();
 
     app.use(cors({
-        origin: process.env.CORS_ORIGIN,
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         credentials: true
     }));
 
     app.use(express.json());
-    
+
     connectToDatabase();
     const authMiddleware = new BearerAuthMiddleware();
 
