@@ -15,6 +15,6 @@ COPY --from=builder /app .
 
 RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8080
+EXPOSE 9090
 
 CMD ["node", "src/index.js"]
