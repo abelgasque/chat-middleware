@@ -9,6 +9,12 @@ const dbConfig = {
   port: Number(process.env.DB_PORT),
   dialect: "postgres",
   logging: process.env.NODE_ENV === 'development' ? console.log : false,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
 };
 
 const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
@@ -16,6 +22,7 @@ const sequelize = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.p
   port: dbConfig.port,
   dialect: dbConfig.dialect,
   logging: dbConfig.logging,
+  dialectOptions: process.env.NODE_ENV === 'production' ? dbConfig.dialectOptions : undefined,
 });
 
 const connectToDatabase = async () => {
