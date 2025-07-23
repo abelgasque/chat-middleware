@@ -13,7 +13,7 @@ docker pull abelgasque/chat-middleware
 ```
 
 ``` bash
-docker run -d --env-file .env -p 8080:8080 abelgasque/chat-middleware
+docker run -d --env-file .env -p 9090:9090 abelgasque/chat-middleware
 ```
 
 ### Requisitos
@@ -53,7 +53,7 @@ npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
 
-Agora, o servidor estará em execução na porta 8080 (ou na porta que você especificou no arquivo index.js).
+Agora, o servidor estará em execução na porta 9090 (ou na porta que você especificou no arquivo index.js).
 
 ### Novas migracoes
 
@@ -81,7 +81,7 @@ Você pode testar a API utilizando uma ferramenta como o Postman ou fazendo requ
 
 Para maior comodidade, na raiz do projeto, você encontrará o arquivo `postman_collection.json` que contém todas as requisições pré-configuradas para o Postman. Basta importar este arquivo no aplicativo do Postman para começar a testar a API imediatamente. Isso facilitará a sua interação com os endpoints e permitirá que você explore todas as funcionalidades da API de forma mais eficiente.
 
-Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 8080 do contêiner para a porta 8080 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost:8080.
+Isso iniciará um contêiner Docker com sua aplicação, mapeando a porta 9090 do contêiner para a porta 9090 do seu sistema host. Isso permitirá que você acesse sua aplicação através do endereço http://localhost:9090.
 
 Com esses passos, sua aplicação estará implantada e em execução em um ambiente de desenvolvimento Docker, pronto para ser testada e depurada conforme necessário. Certifique-se de adaptar os comandos e as configurações conforme apropriado para o seu projeto específico.
 
