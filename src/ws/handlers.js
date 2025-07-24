@@ -1,22 +1,28 @@
 import url from 'url';
 
-import AmqpService from "../api/services/amqp.service.js";
+import ApiService from "../api/services/api.service.js";
 
-const amqpService = new AmqpService();
+const apiService = new ApiService();
 
 export const userConnections = new Map();
 
 export async function handleConnection(ws, req) {
   const params = new URLSearchParams(url.parse(req.url).query);
   const userId = params.get('userId');
+  const token = params.get('token');
 
   if (!userId) {
     ws.send('❌ Conexão recusada: usuário não identificado.');
     ws.close();
     return;
   }
+  
+  if (!token) {
+    ws.send('❌ Conexão recusada: token não fornecido.');
+    ws.close();
+    return;
+  }
 
-  await amqpService.connect();
   userConnections.set(userId, ws);
   console.log(`✅ Usuário ${userId} conectado`);
 
@@ -26,10 +32,7 @@ export async function handleConnection(ws, req) {
     console.log(`Mensagem recebida de ${userId}: ${payload}`);
     try {
       const data = JSON.parse(payload);
-      await amqpService.publishToExchange('events', 'user.message', {
-        type: 'user.message',
-        payload: data
-      });
+      await apiService.sendUserMessage(token, userId, data.toUserId, data.message);
     } catch (err) {
       console.error('Erro ao processar mensagem:', err);
       ws.send('❌ Erro ao processar mensagem');
