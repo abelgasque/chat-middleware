@@ -1,8 +1,12 @@
 import url from 'url';
 
+import AmqpService from "../api/services/amqp.service.js";
+
+const amqpService = new AmqpService();
+
 export const userConnections = new Map();
 
-export function handleConnection(ws, req) {
+export async function handleConnection(ws, req) {
   const params = new URLSearchParams(url.parse(req.url).query);
   const userId = params.get('userId');
 
@@ -12,16 +16,17 @@ export function handleConnection(ws, req) {
     return;
   }
 
+  await amqpService.connect();
   userConnections.set(userId, ws);
   console.log(`✅ Usuário ${userId} conectado`);
 
   ws.send('👋 Conexão WebSocket autenticada com sucesso!');
 
-  ws.on('message', (payload) => {
+  ws.on('message', async (payload) => {
     console.log(`Mensagem recebida de ${userId}: ${payload}`);
     try {
       const data = JSON.parse(payload);
-      this.amqpService.publishToExchange('events', 'user.message', {
+      await amqpService.publishToExchange('events', 'user.message', {
         type: 'user.message',
         payload: data
       });

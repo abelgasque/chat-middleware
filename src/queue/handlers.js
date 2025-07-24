@@ -5,26 +5,31 @@ const userService = new UserService();
 
 export function handlers(type, payload) {
   switch (type) {
-    case "user.message":
+    case "user.message": {
       console.log("📩 Criar mensagem com payload:", payload);
       const { toUserId, message } = payload;
       const toUserSocket = userConnections.get(toUserId);
       if (toUserSocket) {
         toUserSocket.send(message);
       } else {
-        ws.send(`⚠️ Usuário ${toUserId} não está conectado.`);
+        console.warn(`⚠️ Usuário ${toUserId} não está conectado.`);
       }
-    case "user.created":
+      return;
+    }
+    case "user.created": {
       console.log("📩 Criar usuário com payload:", payload);
       return userService.create(payload);
-    case "user.updated":
+    }
+    case "user.updated": {
       console.log("✏️ Atualizar usuário com payload:", payload);
       return userService.update(payload.id, payload.body);
-    case "user.deleted":
+    }
+    case "user.deleted": {
       console.log("🗑️ Excluir usuário com id:", payload.id);
       return userService.delete(payload.id);
-    default:
+    }
+    default: {
       console.warn(`⚠️ Handler não encontrado para tipo: ${type}`);
-      throw new Error(`Handler não encontrado para tipo: ${type}`);
+    }
   }
 }
