@@ -13,7 +13,7 @@ docker pull abelgasque/chat-middleware
 ```
 
 ``` bash
-docker run -d --env-file .env -p 9090:9090 abelgasque/chat-middleware
+docker run -d --name chat-middleware-container --env-file .env -p 9090:9090 abelgasque/chat-middleware
 ```
 
 ### Requisitos
