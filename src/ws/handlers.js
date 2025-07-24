@@ -17,23 +17,20 @@ export function handleConnection(ws, req) {
 
   ws.send('👋 Conexão WebSocket autenticada com sucesso!');
 
-  ws.on('message', (message) => {
+  ws.on('message', (payload) => {
+    console.log(`Mensagem recebida de ${userId}: ${payload}`);
     try {
-      const data = JSON.parse(message);
-      const { toUserId, content } = data;
+      const data = JSON.parse(payload);
+      const { toUserId, message } = data;
 
       const toUserSocket = userConnections.get(toUserId);
       if (toUserSocket) {
-        toUserSocket.send(
-          JSON.stringify({
-            fromUserId: userId,
-            content,
-          })
-        );
+        toUserSocket.send(message);
       } else {
         ws.send(`⚠️ Usuário ${toUserId} não está conectado.`);
       }
     } catch (err) {
+      console.error('Erro ao processar mensagem:', err);
       ws.send('❌ Erro ao processar mensagem');
     }
   });
