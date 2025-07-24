@@ -1,6 +1,6 @@
 import url from 'url';
- 
-const userConnections = new Map();
+
+export const userConnections = new Map();
 
 export function handleConnection(ws, req) {
   const params = new URLSearchParams(url.parse(req.url).query);
@@ -21,14 +21,10 @@ export function handleConnection(ws, req) {
     console.log(`Mensagem recebida de ${userId}: ${payload}`);
     try {
       const data = JSON.parse(payload);
-      const { toUserId, message } = data;
-
-      const toUserSocket = userConnections.get(toUserId);
-      if (toUserSocket) {
-        toUserSocket.send(message);
-      } else {
-        ws.send(`⚠️ Usuário ${toUserId} não está conectado.`);
-      }
+      this.amqpService.publishToExchange('events', 'user.message', {
+        type: 'user.message',
+        payload: data
+      });
     } catch (err) {
       console.error('Erro ao processar mensagem:', err);
       ws.send('❌ Erro ao processar mensagem');

@@ -1,9 +1,19 @@
 import UserService from "../api/services/user.service.js";
+import { userConnections } from '../ws/handlers.js';
 
 const userService = new UserService();
 
 export function handlers(type, payload) {
   switch (type) {
+    case "user.message":
+      console.log("📩 Criar mensagem com payload:", payload);
+      const { toUserId, message } = payload;
+      const toUserSocket = userConnections.get(toUserId);
+      if (toUserSocket) {
+        toUserSocket.send(message);
+      } else {
+        ws.send(`⚠️ Usuário ${toUserId} não está conectado.`);
+      }
     case "user.created":
       console.log("📩 Criar usuário com payload:", payload);
       return userService.create(payload);
