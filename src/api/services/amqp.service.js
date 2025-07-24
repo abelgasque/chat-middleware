@@ -1,6 +1,15 @@
 import amqp from 'amqplib';
 import "dotenv/config";
 
+const {
+  RABBITMQ_ENABLE,
+  RABBITMQ_PROTOCOL,
+  RABBITMQ_HOST,
+  RABBITMQ_USER,
+  RABBITMQ_PASSWORD,
+  RABBITMQ_VHOST,
+} = process.env;
+
 class AmqpService {
   constructor() {
     this.connection = null;
@@ -10,16 +19,27 @@ class AmqpService {
   async connect() {
     if (this.connection && this.channel) return;
 
-    this.connection = await amqp.connect({
-      protocol: 'amqp',
-      hostname: process.env.RABBITMQ_HOST,
-      port: parseInt(process.env.RABBITMQ_PORT),
-      username: process.env.RABBITMQ_USER,
-      password: process.env.RABBITMQ_PASSWORD,
-      vhost: process.env.RABBITMQ_VHOST
-    });
+    try {
+      const amqpUrl = `${RABBITMQ_PROTOCOL}://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@${RABBITMQ_HOST}${RABBITMQ_VHOST}`;
+      this.connection = await amqp.connect(amqpUrl);
 
-    this.channel = await this.connection.createChannel();
+      this.connection.on('close', async () => {
+        console.warn('🔌 Conexão com RabbitMQ encerrada. Tentando reconectar...');
+        this.connection = null;
+        this.channel = null;
+        setTimeout(() => this.connect(), 5000);
+      });
+
+      this.connection.on('error', (err) => {
+        console.error('❌ Erro na conexão com RabbitMQ:', err.message);
+      });
+
+      this.channel = await this.connection.createChannel();
+      console.log('✅ Conexão com RabbitMQ estabelecida');
+    } catch (err) {
+      console.error('❌ Falha ao conectar no RabbitMQ:', err.message);
+      setTimeout(() => this.connect(), 5000);
+    }
   }
 
   async publishToExchange(exchange, routingKey, message) {
