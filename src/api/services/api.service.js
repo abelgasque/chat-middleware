@@ -11,9 +11,9 @@ class ApiService {
                 'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify({
-                "senderId": senderId,
-                "receiverId": receiverId,
-                "message": message,
+                senderId: senderId,
+                receiverId: receiverId,
+                message: message,
             }),
         });
 
@@ -24,12 +24,12 @@ class ApiService {
         }
 
         const toUserSocket = userConnections.get(receiverId);
-        if (!toUserSocket) {
-            console.warn(`⚠️ Usuário ${receiverId} não está conectado.`);
+        if (toUserSocket) {
+            console.log(`📩 Mensagem enviada para o usuário ${receiverId}:`, data);
+            toUserSocket.send(message);
         }
-
-        toUserSocket.send(message);
-        console.log(`📩 Mensagem enviada para o usuário ${receiverId}:`, data);
+        
+        console.log(`📩 Mensagem enviada ${receiverId}:`, data);
         return data;
     }
 }
